@@ -39,5 +39,6 @@
     "@types/jsonwebtoken": "^9.0.10",
     "drizzle-kit": "^0.31.4",
     "wrangler": "^4.38.0"
-  }
+  },
+  "packageManager": "pnpm@10.17.1"
 }
