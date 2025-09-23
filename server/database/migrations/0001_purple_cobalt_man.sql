@@ -1,0 +1,1 @@
+ALTER TABLE `fields` ADD `name` text NOT NULL;

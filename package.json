@@ -7,16 +7,37 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
+    "@iconify-json/lucide": "^1.2.68",
+    "@iconify-json/simple-icons": "^1.2.52",
     "@nuxt/eslint": "1.9.0",
-    "@nuxt/ui": "3.3.2",
+    "@nuxt/ui": "^4.0.0-beta.0",
     "@nuxthub/core": "0.9.0",
+    "@pinia/nuxt": "0.11.2",
+    "@tailwindcss/vite": "^4.1.13",
+    "@tanstack/vue-table": "^8.21.3",
+    "@vee-validate/nuxt": "^4.15.1",
+    "@vueuse/nuxt": "^13.9.0",
+    "drizzle-orm": "^0.44.5",
     "eslint": "^9.34.0",
+    "jsonwebtoken": "^9.0.2",
     "nuxt": "^4.0.3",
+    "nuxt-security": "2.4.0",
+    "ohash": "^2.0.11",
+    "pinia": "^3.0.3",
+    "pinia-plugin-persistedstate": "^4.5.0",
+    "tailwindcss": "^4.1.13",
     "typescript": "^5.9.2",
     "vue": "^3.5.18",
-    "vue-router": "^4.5.1"
+    "vue-router": "^4.5.1",
+    "zod": "^4.1.11"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.10",
+    "drizzle-kit": "^0.31.4",
+    "wrangler": "^4.38.0"
   }
 }

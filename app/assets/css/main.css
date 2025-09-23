@@ -1,0 +1,59 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme static {
+  --font-sans: 'Public Sans', sans-serif;
+
+  --color-primary-50: #F5F3FF;
+  --color-primary-100: #EDE9FE;
+  --color-primary-200: #DDD6FE;
+  --color-primary-300: #C4B5FD;
+  --color-primary-400: #A78BFA;
+  --color-primary-500: #8B5CF6;
+  --color-primary-600: #7C3AED;
+  --color-primary-700: #6D28D9;
+  --color-primary-800: #5B21B6;
+  --color-primary-900: #4C1D95;
+  --color-primary-950: #2E1065;
+
+  --color-accent-400: #FF9F1C;
+  --color-accent-500: #FF7A00;
+  --color-accent-600: #E85D04;
+
+  --color-neutral-50: #FAFAFA;
+  --color-neutral-100: #F4F4F5;
+  --color-neutral-200: #E4E4E7;
+  --color-neutral-300: #D4D4D8;
+  --color-neutral-400: #A1A1AA;
+  --color-neutral-500: #71717A;
+  --color-neutral-600: #52525B;
+  --color-neutral-700: #3F3F46;
+  --color-neutral-800: #27272A;
+  --color-neutral-900: #18181B;
+  --color-neutral-950: #0B0B0F;
+
+  --ui-bg: var(--color-neutral-50);
+  --ui-bg-muted: var(--color-neutral-100);
+  --ui-bg-elevated: var(--color-neutral-0);
+  --ui-bg-accented: var(--color-neutral-200);
+
+  --ui-color-primary: var(--color-primary-500);
+  --ui-color-accent: var(--color-accent-500);
+  --ui-text: var(--color-neutral-900);
+  --ui-text-muted: var(--color-neutral-600);
+  --ui-border: var(--color-neutral-200);
+}
+
+.dark {
+  --ui-bg: var(--color-neutral-950);
+  --ui-bg-muted: var(--color-neutral-900);
+  --ui-bg-elevated: var(--color-neutral-900);
+  --ui-bg-accented: var(--color-neutral-800);
+
+  --ui-color-primary: var(--color-primary-400);
+  --ui-color-accent: var(--color-accent-400);
+
+  --ui-text: var(--color-neutral-50);
+  --ui-text-muted: var(--color-neutral-400);
+  --ui-border: var(--color-neutral-700);
+}
