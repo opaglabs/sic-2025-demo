@@ -1,5 +1,6 @@
-
-import jwt from 'jsonwebtoken'
+import { jwtVerify } from 'jose'
+import { getJwtSecret } from '~~/server/utils/secret'
+import { useDrizzle } from '~~/server/utils/drizzle'
 
 interface Field {
   type: string;
@@ -23,8 +24,8 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as { userId: number }
-  
+    const { payload } = await jwtVerify(token, new TextEncoder().encode(getJwtSecret()!))
+
     const body = await readBody<{ userId: number, title: string, description?: string, fields: Field[] }>(event)
 
     const formId = crypto.randomUUID()
@@ -33,7 +34,7 @@ export default defineEventHandler(async (event) => {
 
     const form = await db.insert(tables.forms).values({
       id: formId,
-      userId: decoded.userId,
+      userId: payload.userId as number,
       title: body.title,
       description: body.description ?? '',
       createdAt: new Date(),

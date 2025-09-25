@@ -1,4 +1,6 @@
-import jwt from 'jsonwebtoken'
+import { jwtVerify } from 'jose'
+import { getJwtSecret } from '~~/server/utils/secret'
+import { useDrizzle } from '~~/server/utils/drizzle'
 
 export default defineEventHandler(async (event) => {
   const authHeader = getRequestHeader(event, 'Authorization')
@@ -14,13 +16,13 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!)
+    const { payload } = await jwtVerify(token, new TextEncoder().encode(getJwtSecret()!))
 
     const id = getRouterParam(event, 'id')
 
     const db = useDrizzle();
 
-    const form = await db.select().from(tables.forms).where(and(eq(tables.forms.id, id), eq(tables.forms.userId, (decoded as { userId: number }).userId))).get()
+    const form = await db.select().from(tables.forms).where(and(eq(tables.forms.id, id), eq(tables.forms.userId, (payload as { userId: number }).userId))).get()
 
     if (!form) {
       throw createError({ statusCode: 404, statusMessage: 'Form not found' })

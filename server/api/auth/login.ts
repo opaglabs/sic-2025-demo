@@ -1,5 +1,7 @@
-import jwt from 'jsonwebtoken'
+import { SignJWT } from 'jose'
 import { hash } from 'ohash';
+import { getJwtSecret } from '~~/server/utils/secret'
+import { useDrizzle } from '~~/server/utils/drizzle'
 
 export default defineEventHandler(async (event) => {
   const { email, password } = await readBody<{ email: string; password: string }>(event)
@@ -22,13 +24,10 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 401, statusMessage: 'Invalid credentials' })
   }
 
-  const token = jwt.sign(
-    {
-      userId: user.id,
-    },
-    process.env.JWT_SECRET!,
-    { expiresIn: '24h' }
-  )
+  const token = await new SignJWT({ userId: user.id })
+    .setProtectedHeader({ alg: 'HS256', typ: 'JWT' })
+    .setExpirationTime('24h')
+    .sign(new TextEncoder().encode(getJwtSecret()))
 
   return { user: { id: user.id, email: user.email, name: user.name }, token }
 })

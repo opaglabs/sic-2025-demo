@@ -4,6 +4,9 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
+  runtimeConfig: {
+    jwtSecret: process.env.JWT_SECRET
+  },
   modules: [
     '@nuxt/eslint',
     '@nuxt/ui',
@@ -11,19 +14,7 @@ export default defineNuxtConfig({
     'nuxt-security',
     '@pinia/nuxt',
     'pinia-plugin-persistedstate/nuxt',
-    '@vueuse/nuxt',
-    [
-      '@vee-validate/nuxt',
-      {
-        autoImports: true,
-        componentNames: {
-          Form: 'VeeForm',
-          Field: 'VeeField',
-          ErrorMessage: 'VeeErrorMessage',
-          FieldArray: 'VeeFieldArray'
-        }
-      }
-    ]
+    '@vueuse/nuxt'
   ],
   pinia: {
     storesDirs: ['./app/stores/**.ts']

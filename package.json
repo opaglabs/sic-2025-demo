@@ -19,11 +19,10 @@
     "@pinia/nuxt": "0.11.2",
     "@tailwindcss/vite": "^4.1.13",
     "@tanstack/vue-table": "^8.21.3",
-    "@vee-validate/nuxt": "^4.15.1",
     "@vueuse/nuxt": "^13.9.0",
     "drizzle-orm": "^0.44.5",
     "eslint": "^9.34.0",
-    "jsonwebtoken": "^9.0.2",
+    "jose": "^6.1.0",
     "nuxt": "^4.0.3",
     "nuxt-security": "2.4.0",
     "ohash": "^2.0.11",
@@ -38,7 +37,7 @@
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.10",
     "drizzle-kit": "^0.31.4",
-    "wrangler": "^4.38.0"
+    "wrangler": "^4.40.0"
   },
   "packageManager": "pnpm@10.17.1"
 }
