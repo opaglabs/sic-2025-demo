@@ -29,6 +29,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Write .env
+        run: |
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" > .env
+
       - name:  Deploy with nuxthub
         run: |
           export NODE_OPTIONS="--max_old_space_size=4096"
@@ -36,5 +40,3 @@ jobs:
         env:
           NUXT_HUB_PROJECT_KEY: ${{ secrets.NUXT_HUB_PROJECT_KEY}}
           NUXT_HUB_USER_TOKEN: ${{ secrets.NUXT_HUB_USER_TOKEN }}
-          NUXT_SITE_URL: ${{ secrets.SITE_URL }}
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
