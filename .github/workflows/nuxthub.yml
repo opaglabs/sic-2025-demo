@@ -37,3 +37,4 @@ jobs:
           NUXT_HUB_PROJECT_KEY: ${{ secrets.NUXT_HUB_PROJECT_KEY}}
           NUXT_HUB_USER_TOKEN: ${{ secrets.NUXT_HUB_USER_TOKEN }}
           NUXT_SITE_URL: ${{ secrets.SITE_URL }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
