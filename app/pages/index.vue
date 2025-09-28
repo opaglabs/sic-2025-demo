@@ -9,7 +9,7 @@
 
     <div class="mt-10 p-4 border border-gray-200 rounded">
       <h2 class="text-lg font-medium mb-2">Your API Token</h2>
-      <p class="mb-4 text-sm text-gray-600">
+      <p class="mb-4 text-sm">
         Use this token to authenticate your API requests. Keep it secret and secure.
       </p>
       <div class="flex items-center">
