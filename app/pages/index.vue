@@ -6,6 +6,19 @@
       <UButton label="New Form" icon="i-lucide-plus" to="/forms/create" />
     </div>
     <UiTableElement :data="data?.forms" :columns="columns" :loading="status === 'pending'" />
+
+    <div class="mt-10 p-4 bg-gray-50 border border-gray-200 rounded">
+      <h2 class="text-lg font-medium mb-2">Your API Token</h2>
+      <p class="mb-4 text-sm text-gray-600">
+        Use this token to authenticate your API requests. Keep it secret and secure.
+      </p>
+      <div class="flex items-center">
+        <code class="bg-white border border-gray-300 rounded px-3 py-2 text-sm break-all mr-4">
+          {{ authStore.token }}
+        </code>
+        <UButton label="Copy Token" icon="i-lucide-copy" variant="outline" @click="copyMyToken" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -164,5 +177,17 @@ function getRowItems(row: Row<Form>) {
       }
     },
   ]
+}
+
+const copyMyToken = () => {
+  if (!authStore.token) return
+
+  copy(authStore.token)
+
+  toast.add({
+    title: 'Token copied to clipboard!',
+    color: 'success',
+    icon: 'i-lucide-circle-check'
+  })
 }
 </script>
