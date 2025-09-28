@@ -7,16 +7,16 @@
     </div>
     <UiTableElement :data="data?.forms" :columns="columns" :loading="status === 'pending'" />
 
-    <div class="mt-10 p-4 bg-gray-50 border border-gray-200 rounded">
+    <div class="mt-10 p-4 border border-gray-200 rounded">
       <h2 class="text-lg font-medium mb-2">Your API Token</h2>
       <p class="mb-4 text-sm text-gray-600">
         Use this token to authenticate your API requests. Keep it secret and secure.
       </p>
       <div class="flex items-center">
-        <code class="bg-white border border-gray-300 rounded px-3 py-2 text-sm break-all mr-4">
+        <code class="border border-gray-300 rounded px-3 py-2 text-sm truncate mr-4">
           {{ authStore.token }}
         </code>
-        <UButton label="Copy Token" icon="i-lucide-copy" variant="outline" @click="copyMyToken" />
+        <UButton label="Copy Token" icon="i-lucide-copy" @click="copyMyToken" />
       </div>
     </div>
   </div>
