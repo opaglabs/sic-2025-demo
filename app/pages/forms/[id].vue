@@ -11,13 +11,26 @@
 
       <h1 class="text-2xl font-bold">Edit Form</h1>
     </div>
-    <FormCreateAndEdit v-if="status === 'success'" v-model="data" :loading="loading" @submit="onSubmit" />
+    <FormCreateAndEdit v-if="status === 'success' && Object.keys(form).length > 0" v-model="form" :loading="loading" @submit="onSubmit" />
+    <span v-else>Carregando...</span>
   </div>
 </template>
 
 <script setup lang="ts">
 import type * as z from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
+
+interface DataRequest {
+  title: string
+  description: string
+  fields: {
+    name: string
+    type: string
+    label: string
+    required: boolean
+    options: string
+  }[]
+}
 
 const route = useRoute()
 const authStore = useAuthStore()
@@ -27,37 +40,35 @@ const loading = ref(false)
 
 const { data, status } = useAsyncData(
   `form-${route.params.id}`,
-  async () => {
-    try {
-      const data = await $fetch<{
-        title: string
-        description: string
-        fields: {
-          name: string
-          type: string
-          label: string
-          required: boolean
-          options: string
-        }[]
-      }>(`/api/forms/${route.params.id}`, {
-        headers: {
-          Authorization: `Bearer ${authStore.token}`
-        }
-      })
-      return data
-    } catch (e) {
-      toast.add({
-        title: 'Error',
-        description: 'An error occurred - ' + (e as Error).message,
-        color: 'error'
-      })
-      return null
-    }
-  },
-  {
-    watch: [() => route.params.id],
+ async () => {
+  try {
+    const response =  await $fetch<DataRequest>(`/api/forms/${route.params.id}`, {
+      headers: {
+        Authorization: `Bearer ${authStore.token}`
+      }
+    }).then((res) => ({
+      ...res,
+      fields: res.fields.map((field) => ({
+        ...field,
+        options: JSON.stringify(field.options, null, 2)
+      }))
+    }))
+
+    return response;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (e) {
+    return {};
   }
-)
+ }
+);
+
+const form = ref<DataRequest>({} as DataRequest);
+
+watchEffect(() => {
+  if (data.value) {
+    form.value = { ...data.value } as DataRequest
+  }
+})
 
 type Schema = z.output<typeof data>
 
