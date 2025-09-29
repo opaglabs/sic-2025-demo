@@ -27,27 +27,33 @@ const loading = ref(false)
 
 const { data, status } = useAsyncData(
   `form-${route.params.id}`,
-  async () => $fetch<{
-    title: string
-    description: string
-    fields: {
-      name: string
-      type: string
-      label: string
-      required: boolean
-      options: string
-    }[]
-  }>(`/api/forms/${route.params.id}`, {
-    headers: {
-      Authorization: `Bearer ${authStore.token}`
+  async () => {
+    try {
+      const data = await $fetch<{
+        title: string
+        description: string
+        fields: {
+          name: string
+          type: string
+          label: string
+          required: boolean
+          options: string
+        }[]
+      }>(`/api/forms/${route.params.id}`, {
+        headers: {
+          Authorization: `Bearer ${authStore.token}`
+        }
+      })
+      return data
+    } catch (e) {
+      toast.add({
+        title: 'Error',
+        description: 'An error occurred - ' + (e as Error).message,
+        color: 'error'
+      })
+      return null
     }
-  }).then((res) => ({
-    ...res,
-    fields: res.fields.map((field) => ({
-      ...field,
-      options: JSON.stringify(field.options, null, 2)
-    }))
-  })),
+  },
   {
     watch: [() => route.params.id],
   }
