@@ -34,12 +34,6 @@
           <UCheckbox v-model="field.required" />
         </UFormField>
 
-        <UFormField name="options" label="Options (JSON)" class="w-full">
-          <UTextarea
-            v-model="field.options" placeholder='e.g. {"min": 0, "max": 100} for number type' class="w-full"
-            :rows="3" />
-        </UFormField>
-
         <div class="flex justify-end">
           <UButton
             type="button" icon="i-lucide-trash-2" color="error" variant="subtle"
